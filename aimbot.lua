@@ -5,7 +5,7 @@ local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
 
 -- Configuration (Adjust these values)
-local LockOnDistance = 50 -- How close a player needs to be to lock on
+local LockOnDistance = 250 -- How close a player needs to be to lock on
 local CameraLockEnabled = true -- Whether camera lock is initially enabled
 
 -- Variables
