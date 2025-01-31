@@ -3,8 +3,8 @@ local Players = game:GetService("Players")
 local function highlightPlayer(character)
     if character then
         local highlight = Instance.new("Highlight")
-        highlight.FillColor = Color3.fromRGB(255, 255, 0) -- Yellow glow
-        highlight.OutlineColor = Color3.fromRGB(255, 0, 0) -- Red outline
+        highlight.FillColor = Color3.fromRGB(255, 0, 0) -- Yellow glow
+        highlight.OutlineColor = Color3.fromRGB(255, 255, 0) -- Red outline
         highlight.Parent = character
     end
 end
