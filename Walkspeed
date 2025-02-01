@@ -1,0 +1,59 @@
+local player = game.Players.LocalPlayer
+
+local function createGUI()
+    -- Create the ScreenGui (Parented to StarterGui so it doesn't reset)
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.ResetOnSpawn = false -- Prevents GUI from disappearing on respawn
+    screenGui.Parent = player:FindFirstChildOfClass("PlayerGui")
+
+    -- Create the Frame (Main GUI)
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(0, 200, 0, 100)
+    frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+    frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    frame.Active = true -- Enables manual dragging
+    frame.Draggable = true -- Allows dragging
+    frame.Parent = screenGui
+
+    -- Create the TextBox (Input Field)
+    local textBox = Instance.new("TextBox")
+    textBox.Size = UDim2.new(0, 180, 0, 40)
+    textBox.Position = UDim2.new(0.5, -90, 0, 10)
+    textBox.PlaceholderText = "Enter WalkSpeed"
+    textBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    textBox.Text = ""
+    textBox.Parent = frame
+
+    -- Create the Button
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 180, 0, 40)
+    button.Position = UDim2.new(0.5, -90, 0, 55)
+    button.Text = "Set Speed"
+    button.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+    button.Parent = frame
+
+    -- Function to change WalkSpeed
+    button.MouseButton1Click:Connect(function()
+        local character = player.Character
+        if character then
+            local humanoid = character:FindFirstChild("Humanoid")
+            if humanoid then
+                local speed = tonumber(textBox.Text)
+                if speed and speed > 0 then
+                    humanoid.WalkSpeed = speed
+                else
+                    textBox.Text = "Invalid Input"
+                end
+            end
+        end
+    end)
+end
+
+-- Create GUI when script runs
+createGUI()
+
+-- Re-create GUI after respawning
+player.CharacterAdded:Connect(function()
+    task.wait(1) -- Small delay to ensure PlayerGui is loaded
+    createGUI()
+end)
